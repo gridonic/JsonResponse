@@ -1,0 +1,18 @@
+{
+    "name": "gridonic/json-response",
+    "type": "library",
+    "description": "Nice structured JsonResponse for the HttpFoundation",
+    "keywords": [ "httpfoundation", "symfony"],
+    "homepage": "http://gridonic.ch",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "gridonic",
+            "homepage": "http://gridonic.ch"
+        }
+    ],
+    "require": {
+        "php":                              ">=5.3.3",
+        "symfony/http-foundation":          "2.6.*"
+    }
+}
