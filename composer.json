@@ -14,5 +14,10 @@
     "require": {
         "php":                              ">=5.3.3",
         "symfony/http-foundation":          "~2"
+    },
+   "autoload": {
+        "psr-0": {
+            "Gridonic\\": ""
+        }
     }
 }
