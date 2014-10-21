@@ -67,9 +67,9 @@ abstract class StructuredJsonResponse extends JsonResponse
     }
 
     /**
-     * @return array data
+     * @return array JSON decoded data
      */
     public function getData() {
-        return $this->data;
+        return json_decode($this->data);
     }
 }
