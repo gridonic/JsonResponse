@@ -23,7 +23,7 @@ class ErrorJsonResponse extends StructuredJsonResponse
     {
         parent::__construct('', $status, $headers);
 
-        // make sure error responses also have real error status codes
+        // Make sure error responses also have real error status codes
         if (!$this->isClientError() && !$this->isServerError()) {
             throw new \InvalidArgumentException(sprintf('The HTTP status code "%s" is not an error status code.', $status));
         }
