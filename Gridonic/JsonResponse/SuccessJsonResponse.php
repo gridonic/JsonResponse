@@ -22,7 +22,7 @@ class SuccessJsonResponse extends StructuredJsonResponse
     {
         parent::__construct('', $status, $headers);
 
-        // make sure error responses also have real error status codes
+        // Make sure error responses also have real error status codes
         if (!$this->isSuccessful()) {
             throw new \InvalidArgumentException(sprintf('The HTTP status code "%s" is not a success status code.', $status));
         }
@@ -30,6 +30,7 @@ class SuccessJsonResponse extends StructuredJsonResponse
         if (null === $data) {
             $data = new \ArrayObject();
         }
+
         $this->setMessage($message);
         $this->setData($data);
     }

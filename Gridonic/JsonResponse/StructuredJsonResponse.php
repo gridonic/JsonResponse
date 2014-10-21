@@ -65,4 +65,11 @@ abstract class StructuredJsonResponse extends JsonResponse
 
         return $this->update();
     }
+
+    /**
+     * @return array data
+     */
+    public function getData() {
+        return $this->data;
+    }
 }

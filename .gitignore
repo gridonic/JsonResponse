@@ -2,4 +2,6 @@
 atlassian-ide-plugin.xml
 .idea
 
-# Tests
+# Composer
+composer.lock
+vendor/
