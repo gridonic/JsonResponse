@@ -12,26 +12,26 @@ Include `gridonic/json-response` in your `composer.json`.
 Use a `Gridonic\JsonResponse\SuccessJsonResponse` or a `Gridonic\JsonResponse\ErrorJsonResponse` to build a structured JSON Response.
 
 ```php
-    /**
-     * @param  mixed            $data       The response data
-     * @param  string           $message    Optional success message
-     * @param  integer          $status     The response status code
-     * @param  array            $headers    An array of response headers
-     * @throws \InvalidArgumentException
-     */
-    new SuccessJsonResponse($data, "a simple error-message", 402, $headers, "error-code 222");
+/**
+ * @param  mixed            $data       The response data
+ * @param  string           $message    Optional success message
+ * @param  integer          $status     The response status code
+ * @param  array            $headers    An array of response headers
+ * @throws \InvalidArgumentException
+ */
+ new SuccessJsonResponse($data, 'Success message');
 ```
 
 ```php
-    /**
-     * @param  mixed            $data       The response data
-     * @param  string           $message    Error message
-     * @param  integer          $status     The response status code
-     * @param  array            $headers    An array of response headers
-     * @param  string           $errorCode  An individual error code
-     * @throws \InvalidArgumentException
-     */
-    new ErrorJsonResponse($data, 'an error-message', 402, $headers, 'AB-223');
+/**
+ * @param  mixed            $data       The response data
+ * @param  string           $message    Error message
+ * @param  integer          $status     The response status code
+ * @param  array            $headers    An array of response headers
+ * @param  string           $errorCode  An individual error code
+ * @throws \InvalidArgumentException
+ */
+    new ErrorJsonResponse($data, 'Error message');
 ```
 
 ## Licence
