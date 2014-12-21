@@ -87,7 +87,7 @@ Use a `Gridonic\JsonResponse\SuccessJsonResponse` or a `Gridonic\JsonResponse\Er
  * @param  string           $errorCode  An individual error code
  * @throws \InvalidArgumentException
  */
-    new ErrorJsonResponse($data, 'Error message');
+new ErrorJsonResponse($data, 'Error message');
 ```
 
 ## Licence
