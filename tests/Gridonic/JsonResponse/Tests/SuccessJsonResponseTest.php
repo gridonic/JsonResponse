@@ -15,4 +15,11 @@ class SuccessJsonResponseTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('\Symfony\Component\HttpFoundation\JsonResponse', new SuccessJsonResponse());
     }
+
+    public function testConstructorDefaultJsonObject()
+    {
+        $response = new SuccessJsonResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertSame('{"status":"success","data":{},"message":null}', $response->getContent());
+    }
 }
