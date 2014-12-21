@@ -21,15 +21,16 @@ class ErrorJsonResponse extends StructuredJsonResponse
      */
     public function __construct($data = null, $message = null, $status = 400, $headers = array(), $errorCode = null)
     {
+        // Make sure error json responses have error messages
+        if (!$message) {
+            throw new \InvalidArgumentException('An error json response must have an error message.');
+        }
+
         parent::__construct($data, $status, $headers);
 
         // Make sure error responses also have real error status codes
         if (!$this->isClientError() && !$this->isServerError()) {
             throw new \InvalidArgumentException(sprintf('The HTTP status code "%s" is not an error status code.', $status));
-        }
-
-        if (null === $data) {
-            $data = new \ArrayObject();
         }
 
         $this->setErrorCode($errorCode);
@@ -38,7 +39,7 @@ class ErrorJsonResponse extends StructuredJsonResponse
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public static function create($data = null, $message = null, $status = 400, $headers = array(), $errorCode = null)
     {
@@ -46,10 +47,22 @@ class ErrorJsonResponse extends StructuredJsonResponse
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getType()
     {
         return 'error';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function postProcessStructuredResponse(&$structuredResponse, $data)
+    {
+        parent::postProcessStructuredResponse($structuredResponse, $data);
+
+        if (empty($data) || ($data instanceof \ArrayObject && count($data) === 0)) {
+            unset($structuredResponse['data']);
+        }
     }
 }
