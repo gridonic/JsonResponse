@@ -20,6 +20,20 @@ class SuccessJsonResponseTest extends \PHPUnit_Framework_TestCase
     {
         $response = new SuccessJsonResponse();
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertSame('{"status":"success","data":{},"message":null}', $response->getContent());
+        $this->assertSame('{"status":"success","data":null}', $response->getContent());
+    }
+
+    public function testJsonObjectWithData()
+    {
+        $postData = array(
+            'post' => array(
+                'id' => 1,
+                'title' => 'A blog post',
+            )
+        );
+
+        $response = new SuccessJsonResponse($postData);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertSame('{"status":"success","data":{"post":{"id":1,"title":"A blog post"}}}', $response->getContent());
     }
 }
