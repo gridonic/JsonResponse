@@ -7,6 +7,8 @@ Since JSON responses may have very different formats, this package supports the 
 This package is an extension of the [HttpFoundation\JsonResponse](http://symfony.com/doc/current/components/http_foundation/introduction.html)
 class from the [Symfony](http://symfony.com/) package.
 
+[![Build Status](https://secure.travis-ci.org/gridonic/json-response?branch=master)](http://travis-ci.org/gridonic/json-response)
+
 ## Install
 
 The recommended way to install JsonResponse is [through composer](http://getcomposer.org).

@@ -1,13 +1,13 @@
 {
     "name": "gridonic/json-response",
     "type": "library",
-    "description": "Nice structured JsonResponse for the HttpFoundation",
-    "keywords": [ "json", "http", "symfony"],
+    "description": "Structures JSON responses for the JSend format",
+    "keywords": ["json", "http", "symfony"],
     "homepage": "http://gridonic.ch",
     "license": "MIT",
     "authors": [
         {
-            "name": "gridonic",
+            "name": "gridonic GmbH",
             "homepage": "http://gridonic.ch"
         }
     ],
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Gridonic\\": ""
+            "Gridonic\\": "src"
         }
     }
 }
