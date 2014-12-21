@@ -1,11 +1,41 @@
 # JsonResponse
 
-This is a package for JSON-Responses with a standardized structure.
-This package is an extension for the [HttpFoundation\JsonResponse](http://symfony.com/doc/current/components/http_foundation/introduction.html) of [Symfony](http://symfony.com/).
+Provides simple classes for JSON responses that adhere to a standardized structure.
+Since JSON responses may have very different formats, this package supports the specific
+[JSend](http://labs.omniti.com/labs/jsend) format defined at http://labs.omniti.com/labs/jsend.
+
+This package is an extension of the [HttpFoundation\JsonResponse](http://symfony.com/doc/current/components/http_foundation/introduction.html)
+class from the [Symfony](http://symfony.com/) package.
 
 ## Install
 
-Include `gridonic/json-response` in your `composer.json`.
+The recommended way to install JsonResponse is [through composer](http://getcomposer.org).
+
+You can either add it as a depedency to your project using the command line:
+
+    $ composer require gridonic/json-response
+
+or by adding it directly to your ```composer.json``` file:
+
+```JSON
+{
+    "require": {
+        "gridonic/json-response": "1.0.*"
+    }
+}
+```
+
+Run these two commands to install it:
+
+    $ curl -s http://getcomposer.org/installer | php
+    $ php composer.phar install
+
+Now you can add the autoloader, and you will have access to the library:
+
+```php
+<?php
+require 'vendor/autoload.php';
+```
 
 ## Usage
 
