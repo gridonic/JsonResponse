@@ -20,7 +20,7 @@ class SuccessJsonResponse extends StructuredJsonResponse
      */
     public function __construct($data = null, $message = null, $status = 200, $headers = array())
     {
-        parent::__construct('', $status, $headers);
+        parent::__construct($data, $status, $headers);
 
         // Make sure error responses also have real error status codes
         if (!$this->isSuccessful()) {
