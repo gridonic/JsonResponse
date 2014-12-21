@@ -21,7 +21,7 @@ class ErrorJsonResponse extends StructuredJsonResponse
      */
     public function __construct($data = null, $message = null, $status = 400, $headers = array(), $errorCode = null)
     {
-        parent::__construct('', $status, $headers);
+        parent::__construct($data, $status, $headers);
 
         // Make sure error responses also have real error status codes
         if (!$this->isClientError() && !$this->isServerError()) {

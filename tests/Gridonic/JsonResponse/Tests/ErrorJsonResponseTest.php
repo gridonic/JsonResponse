@@ -16,8 +16,10 @@ class ErrorJsonResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Symfony\Component\HttpFoundation\JsonResponse', new ErrorJsonResponse());
     }
 
-    public function testInstance()
+    public function testConstructorDefaultJsonObject()
     {
-        $this->assertInstanceOf('\Symfony\Component\HttpFoundation\JsonResponse', new ErrorJsonResponse());
+        $response = new ErrorJsonResponse();
+        $this->assertEquals(400, $response->getStatusCode());
+        $this->assertSame('{"status":"error","data":{},"message":null}', $response->getContent());
     }
 }

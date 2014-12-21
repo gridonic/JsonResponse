@@ -11,8 +11,17 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 abstract class StructuredJsonResponse extends JsonResponse
 {
+    /** @var string */
     protected $message;
+
+    /** @var int */
     protected $errorCode;
+
+    /**
+     * @return string The type of the StructuredJsonResponse
+     *
+     */
+    abstract public function getType();
 
     /**
      * Sets the message to be sent.
@@ -28,18 +37,12 @@ abstract class StructuredJsonResponse extends JsonResponse
     /**
      * Sets the error code to be sent.
      *
-     * @param string $errorCode
+     * @param int $errorCode
      */
     public function setErrorCode($errorCode = null)
     {
         $this->errorCode = $errorCode;
     }
-
-    /**
-     * @return string The type of the StructuredJsonResponse
-     *
-     */
-    abstract public function getType();
 
     /**
      * Sets the data to be sent as json.
@@ -56,7 +59,7 @@ abstract class StructuredJsonResponse extends JsonResponse
             'message' => $this->message
         );
 
-        if ($this->errorCode != null) {
+        if ($this->errorCode !== null) {
             $structuredResponse['error_code'] = $this->errorCode;
         }
 
