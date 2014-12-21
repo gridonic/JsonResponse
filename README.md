@@ -61,6 +61,8 @@ success | All went well, and (usually) some data was returned | ```status```, ``
 fail | There was a problem with the data submitted, or some pre-condition of the API call wasn't satisfied | ```status```, ```data``` |
 error | An error occurred in processing the request, i.e. an exception was thrown | ```status```, ```data``` | ```code```, ```data```
 
+Further details and more examples can be found on the [JSend website](http://labs.omniti.com/labs/jsend).
+
 ## Usage
 
 Use a `Gridonic\JsonResponse\SuccessJsonResponse` or a `Gridonic\JsonResponse\ErrorJsonResponse` to build a structured JSON Response.
