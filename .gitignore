@@ -1,7 +1,3 @@
-# PhpStorm-Files
-atlassian-ide-plugin.xml
 .idea
-
-# Composer
 composer.lock
 vendor/
