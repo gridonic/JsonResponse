@@ -19,7 +19,6 @@ abstract class StructuredJsonResponse extends JsonResponse
 
     /**
      * @return string The type of the StructuredJsonResponse
-     *
      */
     abstract public function getType();
 
@@ -56,17 +55,29 @@ abstract class StructuredJsonResponse extends JsonResponse
         $structuredResponse = array(
             'status' => $this->getType(),
             'data' => $data,
-            'message' => $this->message
+            'message' => $this->message,
+            'error_code' => $this->errorCode
         );
 
-        if ($this->errorCode !== null) {
-            $structuredResponse['error_code'] = $this->errorCode;
-        }
+        // Post process data and unset variables where necessary
+        $this->postProcessStructuredResponse($structuredResponse, $data);
 
         // Encode <, >, ', &, and " for RFC4627-compliant JSON, which may also be embedded into HTML.
         $this->data = json_encode($structuredResponse, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
 
         return $this->update();
+    }
+
+    /**
+     * @param array $structuredResponse
+     * @param array $data
+     * @return array
+     */
+    protected function postProcessStructuredResponse(&$structuredResponse, $data)
+    {
+        if (null === $this->errorCode) {
+            unset($structuredResponse['error_code']);
+        }
     }
 
     /**

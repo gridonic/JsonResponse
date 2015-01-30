@@ -27,10 +27,6 @@ class SuccessJsonResponse extends StructuredJsonResponse
             throw new \InvalidArgumentException(sprintf('The HTTP status code "%s" is not a success status code.', $status));
         }
 
-        if (null === $data) {
-            $data = new \ArrayObject();
-        }
-
         $this->setMessage($message);
         $this->setData($data);
     }
@@ -41,6 +37,18 @@ class SuccessJsonResponse extends StructuredJsonResponse
     public static function create($data = null, $message = null, $status = 200, $headers = array())
     {
         return new static($data, $message, $status, $headers);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function postProcessStructuredResponse(&$structuredResponse, $data)
+    {
+        parent::postProcessStructuredResponse($structuredResponse, $data);
+
+        if (null === $this->message) {
+            unset($structuredResponse['message']);
+        }
     }
 
     /**
