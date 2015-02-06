@@ -22,7 +22,7 @@ or by adding it directly to your ```composer.json``` file:
 ```json
 {
     "require": {
-        "gridonic/json-response": "1.0.*"
+        "gridonic/json-response": "1.*"
     }
 }
 ```
@@ -69,10 +69,10 @@ Use a `Gridonic\JsonResponse\SuccessJsonResponse` or a `Gridonic\JsonResponse\Er
 
 ```php
 /**
- * @param  mixed            $data       The response data
- * @param  string           $message    Optional success message
- * @param  integer          $status     The response status code
- * @param  array            $headers    An array of response headers
+ * @param  mixed            $data       The response data               [optional, default: null]
+ * @param  string           $message    Success message                 [optional, default: null]
+ * @param  integer          $status     The response status code        [optional, default: 200]
+ * @param  array            $headers    An array of response headers    [optional, default: array()]
  * @throws \InvalidArgumentException
  */
  new SuccessJsonResponse($data, 'Success message');
@@ -80,15 +80,25 @@ Use a `Gridonic\JsonResponse\SuccessJsonResponse` or a `Gridonic\JsonResponse\Er
 
 ```php
 /**
- * @param  mixed            $data       The response data
- * @param  string           $message    Error message
- * @param  integer          $status     The response status code
- * @param  array            $headers    An array of response headers
- * @param  string           $errorCode  An individual error code
+ * @param  mixed            $data       The response data               [optional, default: null]
+ * @param  string           $message    Error message                   [required]
+ * @param  integer          $status     The response status code        [optional, default: 400]
+ * @param  array            $headers    An array of response headers    [optional, default: array()]
+ * @param  string           $errorCode  An individual error code        [optional, default: null]
  * @throws \InvalidArgumentException
  */
 new ErrorJsonResponse($data, 'Error message');
 ```
+
+## [Releases](https://github.com/gridonic/JsonResponse/releases)
+##### 1.1.0
+New structure of the responses
+
+##### 1.0.5
+Fixed all known Bugs of the initial Release
+
+##### 1.0.0
+Initial Release
 
 ## Licence
 
