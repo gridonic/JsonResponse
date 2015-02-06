@@ -36,9 +36,9 @@ class ErrorJsonResponseTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider optionalParametersProvider
      */
-    public function testOptionalParametersInResponse($data, $message, $status, $expected)
+    public function testOptionalParametersInResponse($data, $message, $title, $status, $expected)
     {
-        $response = new ErrorJsonResponse($data, $message, $status);
+        $response = new ErrorJsonResponse($data, $message, $title, $status);
         $this->assertSame($expected, $response->getContent());
     }
 
@@ -54,11 +54,11 @@ class ErrorJsonResponseTest extends \PHPUnit_Framework_TestCase
     public function optionalParametersProvider()
     {
         return array(
-            array('data', 'Error message', 400, '{"status":"error","data":"data","message":"Error message"}'),
-            array(array('data'), 'Error message', 400, '{"status":"error","data":["data"],"message":"Error message"}'),
-            array(array('posts' => array('id' => 1)), 'Error message', 400, '{"status":"error","data":{"posts":{"id":1}},"message":"Error message"}'),
-            array(null, 'Error message', 400, '{"status":"error","message":"Error message"}'),
-            array(array(), 'Error message', 400, '{"status":"error","message":"Error message"}'),
+            array('data', 'Error message', 'Error title', 400, '{"status":"error","data":"data","message":"Error message","title":"Error title"}'),
+            array(array('data'), 'Error message', 'Error title', 400, '{"status":"error","data":["data"],"message":"Error message","title":"Error title"}'),
+            array(array('posts' => array('id' => 1)), 'Error message', 'Error title', 400, '{"status":"error","data":{"posts":{"id":1}},"message":"Error message","title":"Error title"}'),
+            array(null, 'Error message', 'Error title', 400, '{"status":"error","message":"Error message","title":"Error title"}'),
+            array(array(), 'Error message', null, 400, '{"status":"error","message":"Error message"}'),
         );
     }
 }

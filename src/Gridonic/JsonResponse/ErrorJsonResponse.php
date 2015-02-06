@@ -12,14 +12,24 @@ class ErrorJsonResponse extends StructuredJsonResponse
     /**
      * Constructor.
      *
-     * @param  mixed                    $data    The response data
-     * @param  string                   $message Error message
-     * @param  integer                  $status  The response status code
-     * @param  array                    $headers An array of response headers
+     * @param  mixed                    $data      The response data
+     * @param  string                   $message   Error message
+     * @param  string                   $title     Optional title of the error message
+     * @param  integer                  $status    The response status code
      * @param  string                   $errorCode An individual error code
+     * @param  array                    $errors    An array of errors
+     * @param  array                    $headers   An array of response headers
      * @throws \InvalidArgumentException
      */
-    public function __construct($data = null, $message = null, $status = 400, $headers = array(), $errorCode = null)
+    public function __construct(
+            $data       = null,
+            $message    = null,
+            $title      = null,
+            $status     = 400,
+            $errorCode  = null,
+            $errors     = array(),
+            $headers    = array()
+        )
     {
         // Make sure error json responses have error messages
         if (!$message) {
@@ -34,16 +44,26 @@ class ErrorJsonResponse extends StructuredJsonResponse
         }
 
         $this->setErrorCode($errorCode);
+        $this->setErrors($errors);
         $this->setMessage($message);
+        $this->setTitle($title);
         $this->setData($data);
     }
 
     /**
      * @inheritDoc
      */
-    public static function create($data = null, $message = null, $status = 400, $headers = array(), $errorCode = null)
+    public static function create(
+            $data       = null,
+            $message    = null,
+            $title      = null,
+            $status     = 400,
+            $errorCode  = null,
+            $errors     = array(),
+            $headers    = array()
+        )
     {
-        return new static($data, $message, $status, $headers, $errorCode);
+        return new static($data, $message, $title, $status, $errorCode, $errors, $headers);
     }
 
     /**
