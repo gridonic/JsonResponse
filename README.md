@@ -69,10 +69,10 @@ Use a `Gridonic\JsonResponse\SuccessJsonResponse` or a `Gridonic\JsonResponse\Er
 
 ```php
 /**
- * @param  mixed            $data       The response data               [optional, default: null]
- * @param  string           $message    Success message                 [optional, default: null]
- * @param  integer          $status     The response status code        [optional, default: 200]
- * @param  array            $headers    An array of response headers    [optional, default: array()]
+ * @param  mixed        $data       (optional) The response data
+ * @param  string       $message    (optional) Success message
+ * @param  integer      $status     (optional) The response status code
+ * @param  array        $headers    (optional) An array of response headers
  * @throws \InvalidArgumentException
  */
  new SuccessJsonResponse($data, 'Success message');
@@ -80,11 +80,11 @@ Use a `Gridonic\JsonResponse\SuccessJsonResponse` or a `Gridonic\JsonResponse\Er
 
 ```php
 /**
- * @param  mixed            $data       The response data               [optional, default: null]
- * @param  string           $message    Error message                   [required]
- * @param  integer          $status     The response status code        [optional, default: 400]
- * @param  array            $headers    An array of response headers    [optional, default: array()]
- * @param  string           $errorCode  An individual error code        [optional, default: null]
+ * @param  mixed    $data       (optional) The response data
+ * @param  string   $message    Error message
+ * @param  integer  $status     (optional) The response status code
+ * @param  array    $headers    (optional) An array of response headers
+ * @param  string   $errorCode  (optional) An individual error code
  * @throws \InvalidArgumentException
  */
 new ErrorJsonResponse($data, 'Error message');
