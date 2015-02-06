@@ -80,11 +80,11 @@ Use a `Gridonic\JsonResponse\SuccessJsonResponse` or a `Gridonic\JsonResponse\Er
 
 ```php
 /**
- * @param  mixed    $data       (optional) The response data
- * @param  string   $message    Error message
- * @param  integer  $status     (optional) The response status code
- * @param  array    $headers    (optional) An array of response headers
- * @param  string   $errorCode  (optional) An individual error code
+ * @param  mixed        $data       (optional) The response data
+ * @param  string       $message    Error message
+ * @param  integer      $status     (optional) The response status code
+ * @param  array        $headers    (optional) An array of response headers
+ * @param  string       $errorCode  (optional) An individual error code
  * @throws \InvalidArgumentException
  */
 new ErrorJsonResponse($data, 'Error message');
