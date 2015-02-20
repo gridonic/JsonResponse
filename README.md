@@ -212,12 +212,9 @@ new ErrorJsonResponse($data, $message, $title, $statusCode, $errorCode, $errors)
 }
 ```
 
-## [Releases](https://github.com/gridonic/JsonResponse/releases)
+## Major & Minor [Releases](https://github.com/gridonic/JsonResponse/releases)
 ##### 1.1.0
 New structure of the responses
-
-##### 1.0.5
-Fixed all known Bugs of the initial Release
 
 ##### 1.0.0
 Initial Release
