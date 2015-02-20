@@ -22,7 +22,7 @@ or by adding it directly to your ```composer.json``` file:
 ```json
 {
     "require": {
-        "gridonic/json-response": "1.0.*"
+        "gridonic/json-response": "1.*"
     }
 }
 ```
@@ -39,56 +39,185 @@ Now you can add the autoloader, and you will have access to the library:
 require 'vendor/autoload.php';
 ```
 
-## JSend
+## JsonResponse
 
-A basic JSend-compliant response is as simple as this:
+We differentiate between two different types of Responses:
+* SuccessJsonResponse
+* ErrorJsonResponse
+
+### SuccessJsonResponse
+
+Parameter | Type | Needed? | Default value | Description
+--- | --- | --- | --- | ---
+`$data` | mixed | optional | null | The response data
+`$message` | string | optional | null | A success message
+`$title` | string | optional | null | A success title
+`$status` | integer | optional | 200 | The response status code
+`$headers` | array | optional | array() | An array of response headers
+
+```php
+/**
+ * @throws \InvalidArgumentException
+ */
+ new SuccessJsonResponse($data, 'Success message', 'Success title', 200);
+```
+
+```json
+{
+    "status" : "success",
+    "data" : { ... },
+    "message" : "Sucess message",
+    "title" : "Success title"
+}
+```
+
+### ErrorJsonResponse
+
+Parameter | Type | Needed? | Default value | Description
+--- | --- | --- | --- | ---
+`$data` | mixed | optional | null | The response data
+`$message` | string | required |  | The error message
+`$title` | string | optional | null | An error title
+`$status` | integer | optional | 400 | The response status code
+`$errorCode` | string | optional | null | An individual error code
+`$errors` | array | optional | array() | An array of errors
+`$headers` | array | optional | array() | An array of response headers
+
+```php
+/**
+ * @throws \InvalidArgumentException
+ */
+ new ErrorJsonResponse($data, 'Error message', 'Error title', 400, 'e311', $errors);
+```
+
+```json
+{
+    "status" : "error",
+    "data" : { ... },
+    "message" : "Error message",
+    "title" : "Error title",
+    "error_code" : "e311",
+    "errors" : { ... }
+}
+```
+
+### JSend
+Our Responses are based on the Model of JSend.
+You can find the documentation of JSend on the [JSend website](http://labs.omniti.com/labs/jsend)
+
+## Usage
+
+
+### SuccessJsonResponse
+Use a `Gridonic\JsonResponse\SuccessJsonResponse` to build a structured JSON Response.
+
+#### Empty SuccessJsonResponse
+
+```php
+new SuccessJsonResponse();
+```
+
+```json
+{
+    "status" : "success",
+    "data" : null
+}
+```
+
+#### SuccessJsonResponse with Content
+
+```php
+$data = array(
+    'post' => array(
+        'id' => 1,
+        'title' => 'A blog post',
+    )
+);
+$message = 'The Blog post was successfully created.';
+$title = 'Successfully created!';
+$statusCode = 205;
+
+new SuccessJsonResponse($data, $message, $title, $statusCode);
+```
 
 ```json
 {
     "status" : "success",
     "data" : {
-        "post" : { "id" : 1, "title" : "A blog post", "body" : "Some useful content" }
+        "post": {
+            "id" : 1,
+            "title" : "A blog post"
+        }
+    },
+    "message" : "The Blog post was successfully created.",
+    "title" : "Successfully created!"
+}
+```
+
+### SuccessJsonResponse
+
+Use a `Gridonic\JsonResponse\ErrorJsonResponse` to build a structured JSON Response.
+
+#### ErrorJsonResponse with Message
+
+```php
+$message = 'Oups, data is missing.';
+
+new ErrorJsonResponse(null, $message); // you have to send a message!
+```
+
+```json
+{
+    "status" : "error",
+    "data" : null,
+    "message" : "Oups, data is missing"
+}
+```
+
+#### ErrorJsonResponse with Content
+
+```php
+$data = array(
+    'post' => array(
+        'title' => 'A blog post',
+    )
+);
+$message = 'Oups, data is not correct.';
+$title = 'An error occured!';
+$statusCode = 400;
+$errorCode = e311;
+$errors = array(
+    'body' => 'The parameter is missing.',
+    'title' => 'This parameter is too long.'
+);
+
+new ErrorJsonResponse($data, $message, $title, $statusCode, $errorCode, $errors);
+```
+
+```json
+{
+    "status" : "error",
+    "data" : {
+        "post": {
+            "title" : "A blog post"
+        }
+    },
+    "message" : "Oups, data is missing",
+    "title" : "An error occured",
+    "error_code" : "e311",
+    "errors" : {
+        "body" : "The parameter is missing.",
+        "title" : "This parameter is too long."
     }
 }
 ```
 
-When setting up a JSON API, you'll have all kinds of different types of calls and responses.
-JSend separates responses into some basic types, and defines required and optional keys for each type:
+## Major & Minor [Releases](https://github.com/gridonic/JsonResponse/releases)
+##### 1.1.0
+New structure of the responses
 
-Type | Description | Required Keys | Optional Keys
---- | --- | --- | ---
-success | All went well, and (usually) some data was returned | ```status```, ```data``` |
-fail | There was a problem with the data submitted, or some pre-condition of the API call wasn't satisfied | ```status```, ```data``` |
-error | An error occurred in processing the request, i.e. an exception was thrown | ```status```, ```data``` | ```code```, ```data```
-
-Further details and more examples can be found on the [JSend website](http://labs.omniti.com/labs/jsend).
-
-## Usage
-
-Use a `Gridonic\JsonResponse\SuccessJsonResponse` or a `Gridonic\JsonResponse\ErrorJsonResponse` to build a structured JSON Response.
-
-```php
-/**
- * @param  mixed            $data       The response data
- * @param  string           $message    Optional success message
- * @param  integer          $status     The response status code
- * @param  array            $headers    An array of response headers
- * @throws \InvalidArgumentException
- */
- new SuccessJsonResponse($data, 'Success message');
-```
-
-```php
-/**
- * @param  mixed            $data       The response data
- * @param  string           $message    Error message
- * @param  integer          $status     The response status code
- * @param  array            $headers    An array of response headers
- * @param  string           $errorCode  An individual error code
- * @throws \InvalidArgumentException
- */
-new ErrorJsonResponse($data, 'Error message');
-```
+##### 1.0.0
+Initial Release
 
 ## Licence
 

@@ -14,8 +14,14 @@ abstract class StructuredJsonResponse extends JsonResponse
     /** @var string */
     protected $message;
 
+    /** @var string */
+    protected $title;
+
     /** @var int */
     protected $errorCode;
+
+    /** @var array */
+    protected $errors;
 
     /**
      * @return string The type of the StructuredJsonResponse
@@ -31,6 +37,26 @@ abstract class StructuredJsonResponse extends JsonResponse
     public function setMessage($message = null)
     {
         $this->message = $message;
+    }
+
+    /**
+     * Sets the title to be sent.
+     *
+     * @param string $title
+     */
+    public function setTitle($title = null)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Sets errors to be sent.
+     *
+     * @param array $errors
+     */
+    public function setErrors($errors = array())
+    {
+        $this->errors = $errors;
     }
 
     /**
@@ -56,7 +82,9 @@ abstract class StructuredJsonResponse extends JsonResponse
             'status' => $this->getType(),
             'data' => $data,
             'message' => $this->message,
-            'error_code' => $this->errorCode
+            'title' => $this->title,
+            'error_code' => $this->errorCode,
+            'errors' => $this->errors,
         );
 
         // Post process data and unset variables where necessary
@@ -69,6 +97,13 @@ abstract class StructuredJsonResponse extends JsonResponse
     }
 
     /**
+     * @return array JSON decoded data
+     */
+    public function getData() {
+        return json_decode($this->data);
+    }
+
+    /**
      * @param array $structuredResponse
      * @param array $data
      * @return array
@@ -78,12 +113,13 @@ abstract class StructuredJsonResponse extends JsonResponse
         if (null === $this->errorCode) {
             unset($structuredResponse['error_code']);
         }
-    }
 
-    /**
-     * @return array JSON decoded data
-     */
-    public function getData() {
-        return json_decode($this->data);
+        if (empty($this->errors) || $this->errors instanceof \ArrayObject && count($this->errors) === 0) {
+            unset($structuredResponse['errors']);
+        }
+
+        if (null === $this->title) {
+            unset($structuredResponse['title']);
+        }
     }
 }
