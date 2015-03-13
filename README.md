@@ -27,7 +27,7 @@ or by adding it directly to your ```composer.json``` file:
 }
 ```
 
-Run these two commands to install it:
+Run these two commands to install composer and then our library:
 
     $ curl -s http://getcomposer.org/installer | php
     $ php composer.phar install
@@ -41,7 +41,7 @@ require 'vendor/autoload.php';
 
 ## JsonResponse
 
-We differentiate between two different types of Responses:
+We have two different types of Responses:
 * SuccessJsonResponse
 * ErrorJsonResponse
 
